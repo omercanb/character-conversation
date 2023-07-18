@@ -23,12 +23,15 @@ def line_bold_checks(line):
     return line and line_is_bold(line) and line.replace(' ','')
 
 
-def get_preceding_whitespace_length(line):
-    return len(line)-len(line.lstrip(' '))
-
-
 def line_is_bold(line):
-    return line[0] == '<'
+    return '<b>' in line or '</b>' in line
+
+
+def line_bold_open(line):
+    return '<b>' in line
+
+def line_bold_close(line):
+    return '</b>' in line
 
 
 def remove_bold_tags(line):

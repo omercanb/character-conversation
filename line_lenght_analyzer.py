@@ -1,4 +1,5 @@
 import bold_utils
+import line_utils
 from collections import defaultdict
 
 def get_line_lengths(lines, print_values=False, bold_lines = False):
@@ -8,7 +9,7 @@ def get_line_lengths(lines, print_values=False, bold_lines = False):
             if not bold_utils.line_bold_checks(line):
                 continue
             line = bold_utils.remove_bold_tags(line)
-        whitespace_length = get_preceding_whitespace_length(line)
+        whitespace_length = line_utils.get_preceding_whitespace_length(line)
         whitespace_to_lines[whitespace_length].append(line)
     if print_values:
         print_line_lengths(whitespace_to_lines)
@@ -22,6 +23,4 @@ def print_line_lengths(whitespace_to_lines):
                 print(ex)
 
 
-def get_preceding_whitespace_length(line):
-    return len(line)-len(line.lstrip(' '))
 

@@ -6,17 +6,17 @@ import random
 import character_extractor
 import bold_utils
 import line_lenght_analyzer
+import line_utils
 
 
 def main():
     url = "https://imsdb.com/scripts/Joker.html"
-    soup = get_soup(url)
-    text = get_raw_text(soup)
-    lines = split_to_lines(text)
-    lines = remove_parantheses(lines)
+    text = get_raw_text(get_soup(url))
+    lines = line_utils.remove_parantheses(line_utils.split_to_lines(text))
     characters = character_extractor.get_characters(bold_utils.get_bold_lines(lines), mention_number = 20)
     dialogue = get_dialogue(lines, characters, dialogue_range = (10,18))
     dialogue_dict = get_dialoague_dict(dialogue, characters)
+    print_dialogue(dialogue)
 
 
 def get_dialoague_dict(dialogue, characters):
@@ -30,20 +30,6 @@ def get_dialoague_dict(dialogue, characters):
     return dialogue_dict
 
 
-def remove_parantheses(lines):
-    for i,line in enumerate(lines):
-        pstart = line.find('(')
-        pend = line.find(')')
-        while pstart != -1 and pend != -1:
-            lines[i] = lines[i].replace(lines[i][pstart:pend+1], '')
-            pstart = lines[i].find('(')
-            pend = lines[i].find(')')
-        if pstart != -1 and pend == -1:
-            lines[i] = line.replace(line[pstart:], '')
-        elif pstart == -1 and pend != -1:
-            lines[i] = line.replace(line[:pend+1], '')     
-    return lines
-
 
 def print_dialogue(dialogue):
     for line in dialogue:
@@ -54,43 +40,34 @@ def get_dialogue(lines, characters, dialogue_range):
     dialogue = []
     current_character = None
     for line in lines:
-        if not line:
-            continue
-        if not line.replace('</b>','').strip(' '):
-            continue
 
-        if line[0] == '<':
-            possible_character = line.replace('<b>','').replace('</b>','').strip(' ')
-            if possible_character in characters:
-                if current_character != possible_character:
-                    current_character = possible_character
-                    dialogue.append(current_character)
-            else:
+        if bold_utils.line_bold_open(line):
+            possible_character = bold_utils.remove_bold_tags(line).strip()
+            if possible_character == '': 
+                continue
+            if possible_character not in characters: 
                 current_character = None
+                continue
+            if current_character != possible_character:
+                current_character = possible_character
+                dialogue.append(current_character)
             continue
 
         if not current_character:
             continue
-
-        blank_length = len(line)-len(line.lstrip(' '))
-        if dialogue_range[0] <= blank_length <= dialogue_range[1]:
+        
+        preceding_whitespace_length = line_utils.get_preceding_whitespace_length(line)
+        if dialogue_range[0] <= preceding_whitespace_length <= dialogue_range[1]:
             dialogue.append(line)
     return dialogue
 
 
-def split_to_lines(text, test:int=None):
-    lines = []
+
+def get_raw_text(soup, test = False):
+    if not test:
+        return soup.find('pre').contents
     if test:
-        for line in text[:test]:
-            lines.extend(str(line).splitlines())
-        return lines
-    for line in text:
-        lines.extend(str(line).splitlines())
-    return lines
-
-
-def get_raw_text(soup):
-    return soup.find('pre').contents
+        soup.find('pre').contents[:test]
 
 
 def get_soup(url):
