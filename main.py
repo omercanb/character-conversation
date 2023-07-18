@@ -10,13 +10,14 @@ import line_utils
 
 
 def main():
-    url = input('url')
+    url = 'https://imsdb.com/scripts/A-Quiet-Place.html'
     text = get_raw_text(get_soup(url))
     lines = line_utils.prepeare_lines(text)
     line_lenght_analyzer.get_line_lengths(lines,print_values=True)
-    characters = character_extractor.get_characters(bold_utils.get_bold_lines(lines), mention_number = 20)
-    dialogue = get_dialogue(lines, characters, dialogue_range = (10,18))
+    characters = character_extractor.get_characters(bold_utils.get_bold_lines(lines), mention_number = 10)
+    dialogue = get_dialogue(lines, characters)
     dialogue_dict = get_dialoague_dict(dialogue, characters)
+    print(dialogue_dict)
 
 
 def get_dialoague_dict(dialogue, characters):
@@ -36,12 +37,14 @@ def print_dialogue(dialogue):
         print(line)
 
 
-def get_dialogue(lines, characters, dialogue_range):
+def get_dialogue(lines, characters):
     dialogue = []
     current_character = None
+    writing = True
+    previous_whitespace = 0
     for line in lines:
 
-        if bold_utils.line_bold_open(line):
+        if bold_utils.line_is_bold(line):
             possible_character = bold_utils.remove_bold_tags(line).strip()
             if possible_character == '': 
                 continue
@@ -53,14 +56,19 @@ def get_dialogue(lines, characters, dialogue_range):
                 dialogue.append(current_character)
             continue
 
+
         if not current_character:
             continue
         
         preceding_whitespace_length = line_utils.get_preceding_whitespace_length(line)
-        if dialogue_range[0] <= preceding_whitespace_length <= dialogue_range[1]:
+        if preceding_whitespace_length > previous_whitespace:
+            writing = True
+        if preceding_whitespace_length < previous_whitespace:
+            writing = False
+        previous_whitespace = preceding_whitespace_length
+        if writing:
             dialogue.append(line)
     return dialogue
-
 
 
 def get_raw_text(soup, test = False):

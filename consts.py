@@ -5,6 +5,7 @@ joker: https://imsdb.com/scripts/Joker.html
 https://imsdb.com/scripts/BlacKkKlansman.html
 https://imsdb.com/scripts/A-Prayer-Before-Dawn.html
 https://imsdb.com/scripts/A-Quiet-Place.html
+https://imsdb.com/scripts/Coco.html
 """
 
 movie_transitions = {
@@ -22,4 +23,5 @@ movie_transitions = {
     "SMASH CUT TO:",
     "TIME CUT TO:",
     "WIPE TO:",
+    "CONTINUED:"
 }
