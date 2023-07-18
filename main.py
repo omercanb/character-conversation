@@ -10,13 +10,13 @@ import line_utils
 
 
 def main():
-    url = "https://imsdb.com/scripts/Joker.html"
+    url = input('url')
     text = get_raw_text(get_soup(url))
-    lines = line_utils.remove_parantheses(line_utils.split_to_lines(text))
+    lines = line_utils.prepeare_lines(text)
+    line_lenght_analyzer.get_line_lengths(lines,print_values=True)
     characters = character_extractor.get_characters(bold_utils.get_bold_lines(lines), mention_number = 20)
     dialogue = get_dialogue(lines, characters, dialogue_range = (10,18))
     dialogue_dict = get_dialoague_dict(dialogue, characters)
-    print_dialogue(dialogue)
 
 
 def get_dialoague_dict(dialogue, characters):
@@ -65,10 +65,9 @@ def get_dialogue(lines, characters, dialogue_range):
 
 def get_raw_text(soup, test = False):
     if not test:
-        return soup.find('pre').contents
+        return max(soup.find_all('pre'),key=lambda x: len(x))
     if test:
-        soup.find('pre').contents[:test]
-
+        max(soup.find_all('pre'),key=lambda x: len(x))
 
 def get_soup(url):
     response = requests.get(url)

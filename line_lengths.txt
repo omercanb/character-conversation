@@ -1,0 +1,129 @@
+
+10: 0.49
+11: 0.51
+10:            A dark screen is lit up by twinkling stars .
+10:            A meteorite drifts into frame , heading towards tiny Earth off
+11:             Baba?
+11:             Yes, my son?
+
+6: 0.44
+18: 0.54
+19: 0.02
+6:        A path of marigold petals leads up to an altar lovingly
+6:        arranged in a humble cemetery. An old woman lights a candle
+18:                    Sometimes I think I'm cursed...
+18:                    'cause of something that happened
+19:                     No, it's in there.    Look.
+19:                     Never were truer words spoken.
+
+4: 0.02
+5: 0.10
+6: 0.16
+7: 0.07
+8: 0.01
+10: 0.30
+11: 0.03
+14: 0.01
+15: 0.12
+16: 0.12
+17: 0.04
+18: 0.02
+4:      A cavernous space. The walls, floors, and ceilings are
+4:      molten rock, which has creepy glimmers of fire within it.
+5:       Dark and cramped. The soft red light of fire seeps through
+5:       iron slats. Inside this cage is a man, bound by chains.
+6:        Thor SPINS UP Mjolnir and takes off in a blur.   Skurge starts
+6:        the loooong run down the Rainbow Bridge.
+7:         As the fire covers the skeletons, they SHUDDER TO LIFE.
+7:         HELA'S BUTCHERS, rise up before their commander.
+8:          Undeterred, Thor RUSHES Hela again.    Valkyrie joins in,
+8:          forcing Hela to fight them both.
+10:            My time has come. When my crown is
+10:            reunited with the Eternal Flame, I
+11:             Anyway, it sounds like all I have
+11:             to do to stop Ragnarok is rip that
+14:                Thor, Son of Odin.
+14:                Surtur. Son of a bitch...you're
+15:                 I make grave mistakes all the time.
+15:                 Everything seems to work out.
+16:                  Sure.
+16:                  Hold on. I'm supposed to announce
+17:                   Now I know what you're thinking.
+17:                   Oh no! Thor's in a cage. How did
+18:                    Yes I am. Fight him, win, and get
+18:                    the hell out of this place.
+
+10: 0.54
+20: 0.40
+21: 0.01
+22: 0.02
+23: 0.02
+10:            Rain. Lashing a windowpane. A PIANO PLAYS somewhere off
+10:            screen. Beethoven's Fur Elise.
+20:                      Willy-boy.
+20:                      Trashmouth.
+21:                       You sure it's not too bad out
+21:                       there?
+22:                        Chase Palmer & Cary Fukunaga
+22:                        Isn't it summer vacation? I would
+23:                         So how's it work?
+23:                         Richie!
+
+
+6: 0.44
+18: 0.54
+19: 0.02
+6:        A path of marigold petals leads up to an altar lovingly
+6:        arranged in a humble cemetery. An old woman lights a candle
+18:                    Sometimes I think I'm cursed...
+18:                    'cause of something that happened
+19:                     No, it's in there.    Look.
+19:                     Never were truer words spoken.
+
+
+10: 0.60
+11: 0.40
+10:            Images of stunning violence. Looped.
+10:            Soldiers in a foreign war shoot an unarmed civilian at point-
+11:             Fucking hell...
+11:             Oh God...
+
+5: 0.42
+15: 0.57
+5:       The dust blows and howls as Standard and Melkonis arrive at the top,
+5:       lights bobbing in the darkness.
+15:                 Here's his line.  We can haul him out
+15:                 of there if we have to.
+
+10: 0.15
+14: 0.01
+15: 0.23
+16: 0.35
+17: 0.01
+20: 0.07
+25: 0.06
+26: 0.08
+28: 0.01
+29: 0.02
+10:            The edges are soft, worn-down, the detail roughed away. But
+10:            it is clearly not a human face.
+14:                The Shed is small, packed with electrical equipment, power
+14:                cables, and various implements for repairing power lines.
+15:                 A dense forest on a dark, misty night.
+15:                 YOUNG EDWARD CARNBY , small, thin, and terrified,
+16:                  The forest is pitch black. Young Edward ducks between trees,
+16:                  The trees tower over them. A low fog hangs in the air. The
+17:                   Carnby sits in his lab area, studying the lynchpin artifact
+17:                   rewman Barnes grabs Hudgens and twists his arms behind his
+20:                      You travel light.
+20:                      Trust me, I'm carrying enough baggage for
+25:                           What's going on, Adams?
+25:                           Twenty kids live at this orphanage,
+26:                            Sheriff! I found one! White, male, about
+26:                            ten years old. Looks to be unharmed. He's
+28:                              I'm trapped, man!
+28:                              I'll draw him away...
+29:                               Don't you want to open it? Make sure it's
+29:                               what you're looking for?
+
+

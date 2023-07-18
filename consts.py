@@ -2,6 +2,9 @@
 example urls: 
 halloween: https://imsdb.com/scripts/Halloween.html
 joker: https://imsdb.com/scripts/Joker.html
+https://imsdb.com/scripts/BlacKkKlansman.html
+https://imsdb.com/scripts/A-Prayer-Before-Dawn.html
+https://imsdb.com/scripts/A-Quiet-Place.html
 """
 
 movie_transitions = {
