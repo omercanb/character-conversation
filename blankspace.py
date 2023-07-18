@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 import random
 
+import characters
+import bold
+import line_lenghts
 
 """
 example urls: 
@@ -31,16 +34,12 @@ def main():
     
     url = "https://imsdb.com/scripts/Joker.html"
     soup = get_soup(url)
-    text = get_script(soup)
-    lines = get_lines(text, test=1000)
+    text = get_raw_text(soup)
+    lines = split_to_lines(text)
     lines = remove_parantheses(lines)
-    characters = get_characters(lines, mention_number = 20)
-    dialogue = get_dialogue(lines, characters)
-    dialogue_dict = get_dialoague_dict(dialogue, characters)
-    while True:
-        print(characters)
-        char = input("Choose character: ")
-        print(random.choice(dialogue_dict[char.upper()]))
+    character_names = characters.get_characters(bold.get_bold_lines(lines), mention_number = 20)
+    dialogue = get_dialogue(lines, character_names, dialogue_range = (10,18))
+    dialogue_dict = get_dialoague_dict(dialogue, character_names)
 
 
 def get_dialoague_dict(dialogue, characters):
@@ -57,31 +56,25 @@ def get_dialoague_dict(dialogue, characters):
 
 def remove_parantheses(lines):
     for i,line in enumerate(lines):
-        if '(' in line:
-            if ')' in line:
-                lines[i] = line.replace(line[line.find('('):line.find(')')+1], '')
+        pstart = line.find('(')
+        pend = line.find(')')
+        while pstart != -1 and pend != -1:
+            lines[i] = lines[i].replace(lines[i][pstart:pend+1], '')
+            pstart = lines[i].find('(')
+            pend = lines[i].find(')')
+        if pstart != -1 and pend == -1:
+            lines[i] = line.replace(line[pstart:], '')
+        elif pstart == -1 and pend != -1:
+            lines[i] = line.replace(line[:pend+1], '')     
     return lines
 
-
-def get_characters(lines,mention_number):
-    lengths = get_bold_lengths(lines)
-    mentions = defaultdict(lambda:0)
-    for length in lengths:
-        for line in lengths[length]:
-            mentions[line.strip()] += 1
-    if '' in mentions:
-        del mentions['']
-    for transition in transitions:
-        if transition in mentions:
-            del mentions[transition]
-    mentions = {character:mention for character,mention in mentions.items() if mention >= mention_number}
-    return list(mentions.keys())
 
 def print_dialogue(dialogue):
     for line in dialogue:
         print(line)
 
-def get_dialogue(lines, characters):
+
+def get_dialogue(lines, characters, dialogue_range):
     dialogue = []
     current_character = None
     for line in lines:
@@ -104,12 +97,12 @@ def get_dialogue(lines, characters):
             continue
 
         blank_length = len(line)-len(line.lstrip(' '))
-        if 10 <= blank_length <= 18:
+        if dialogue_range[0] <= blank_length <= dialogue_range[1]:
             dialogue.append(line)
     return dialogue
 
 
-def get_lines(text, test:int=None):
+def split_to_lines(text, test:int=None):
     lines = []
     if test:
         for line in text[:test]:
@@ -120,7 +113,7 @@ def get_lines(text, test:int=None):
     return lines
 
 
-def get_script(soup):
+def get_raw_text(soup):
     return soup.find('pre').contents
 
 
@@ -128,36 +121,6 @@ def get_soup(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text,'html.parser')
     return soup
-
-
-def get_blankspace_lengths(lines, print_values=False):  
-    blank_lengths = defaultdict(lambda:[])
-    for line in lines:
-        blank_length = len(line)-len(line.lstrip(' '))
-        blank_lengths[blank_length].append(line)
-    if print_values:
-        for key in blank_lengths:
-            for ex in blank_lengths[key][:2]:
-                print(key,end=':  ')
-                print(ex)
-
-
-def get_bold_lengths(lines, print_values=False):
-    blank_lengths = defaultdict(lambda:[])
-    for line in lines:
-        if not line:
-            continue
-        if line[0] != '<':
-            continue
-        line = line.replace('<b>','').replace('</b>','')
-        blank_length = len(line)-len(line.lstrip(' '))
-        blank_lengths[blank_length].append(line)
-    if print_values:   
-        for key in blank_lengths:
-            for ex in blank_lengths[key][:2]:
-                print(key,end=':  ')
-                print(ex)
-    return blank_lengths
 
 
 if __name__ == '__main__':
