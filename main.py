@@ -3,43 +3,20 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 import random
 
-import characters
-import bold
-import line_lenghts
+import character_extractor
+import bold_utils
+import line_lenght_analyzer
 
-"""
-example urls: 
-halloween: https://imsdb.com/scripts/Halloween.html
-joker: https://imsdb.com/scripts/Joker.html
-"""
-
-transitions = {
-    "BACK TO:",
-    "CUT TO:",
-    "DISSOLVE TO:",
-    "FADE OUT:",
-    "FADE IN:",
-    "FLASH CUT TO:",
-    "FREEZE FRAME:",
-    "IRIS IN:",
-    "IRIS OUT:",
-    "MATCH CUT TO:",
-    "MATCH DISSOLVE TO:",
-    "SMASH CUT TO:",
-    "TIME CUT TO:",
-    "WIPE TO:",
-}
 
 def main():
-    
     url = "https://imsdb.com/scripts/Joker.html"
     soup = get_soup(url)
     text = get_raw_text(soup)
     lines = split_to_lines(text)
     lines = remove_parantheses(lines)
-    character_names = characters.get_characters(bold.get_bold_lines(lines), mention_number = 20)
-    dialogue = get_dialogue(lines, character_names, dialogue_range = (10,18))
-    dialogue_dict = get_dialoague_dict(dialogue, character_names)
+    characters = character_extractor.get_characters(bold_utils.get_bold_lines(lines), mention_number = 20)
+    dialogue = get_dialogue(lines, characters, dialogue_range = (10,18))
+    dialogue_dict = get_dialoague_dict(dialogue, characters)
 
 
 def get_dialoague_dict(dialogue, characters):
@@ -51,7 +28,6 @@ def get_dialoague_dict(dialogue, characters):
             continue
         dialogue_dict[current_character].append(line.strip())
     return dialogue_dict
-
 
 
 def remove_parantheses(lines):
