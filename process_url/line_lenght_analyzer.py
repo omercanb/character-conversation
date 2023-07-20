@@ -1,7 +1,7 @@
 import bold_utils
 import line_utils
 from collections import defaultdict
-import math
+
 
 def get_line_lengths(lines, print_values=False, bold_lines = False):
     whitespace_to_lines = defaultdict(lambda:[])
@@ -25,7 +25,7 @@ def print_line_lenght_density(whitespace_to_lines):
     density_dict = {key:round(len(whitespace_to_lines[key]),2)/total_lines for key in sorted(whitespace_to_lines.keys()) 
                     if round(len(whitespace_to_lines[key])/total_lines,2) > 0 and len(whitespace_to_lines[key]) > 1}
     for item in density_dict.items():
-        print(f"{item[0]}: {item[1]:.2f}", file=open('line_lengths.txt','a'))
+        print(f"{item[0]}: {item[1]:.2f}")
     return density_dict
 
 
@@ -34,8 +34,8 @@ def print_line_lengths(whitespace_to_lines, density_dict):
         if key not in density_dict:
             continue
         for ex in whitespace_to_lines[key][:2]:
-            print(key,end=':  ', file=open('line_lengths.txt','a'))
-            print(ex, file=open('line_lengths.txt','a'))
+            print(key,end=':  ')
+            print(ex)
 
 
 

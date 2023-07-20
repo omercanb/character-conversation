@@ -3,7 +3,7 @@ All processes involving extracting the characters given the bold lines of a scri
 """
 from collections import defaultdict
 
-from consts import movie_transitions
+from process_url.consts import movie_transitions
 
 
 def get_characters(bold_lines,mention_number):
