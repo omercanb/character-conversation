@@ -10,10 +10,9 @@ https://imsdb.com/scripts/Coco.html
 """
 
 def main():
-    url = input('url: ')
     url = 'https://imsdb.com/scripts/Joker.html'
     dialogue_dict = url_data_extractor.get_url_dialogue(url)
-    print(dialogue_dict)
+    print(dialogue_dict['JOKER'])
 
 if __name__ == '__main__':
     main()
