@@ -11,8 +11,12 @@ https://imsdb.com/scripts/Coco.html
 
 def main():
     url = 'https://imsdb.com/scripts/Joker.html'
-    dialogue_dict = url_data_extractor.get_url_dialogue(url)
-    print(dialogue_dict['JOKER'])
+    print(url_data_extractor.testing(url))
+    # dialogue_dict = url_data_extractor.get_url_dialogue_lines(url)
+    # joker_dialogue = dialogue_dict['JOKER']
+    # joker_dialogue = ' '.join(joker_dialogue)
+    # print(joker_dialogue, file=open('jokertext.txt','w'))
+    #print(joker_dialogue)
 
 if __name__ == '__main__':
     main()
