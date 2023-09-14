@@ -17,16 +17,14 @@ def get_url_dialogue(url):
     dialogue_dict = get_dialoague_dict(dialogue, characters)
     return dialogue_dict
 
-def testing(url):
+def get_prompt_response_list(url):
+    character = "JOKER"
     text = get_raw_text(get_soup(url))
     lines = remove_bolds_not_followed_by_dialogue(remove_non_dialogue(line_utils.prepeare_lines(text)))
-    character = "JOKER"
     lines = remove_repeated_characters(remove_start(lines, character))
     pairs = get_character_prompts_and_responses(lines, character)
-    
-    for line in lines:
-        print(line)
-    print_pairs(pairs)
+
+    return pairs
 
 def bolded(word):
     return f"{bold_tag} {word}"
@@ -42,8 +40,6 @@ def print_pairs(pairs):
         print(f"Prompt: {pair['prompt']}")
         print(f"Response: {pair['response']}")
         print()
-
-    
 
 
 def get_character_prompts_and_responses(lines, character):
