@@ -1,3 +1,6 @@
+gpt2 tests/gpt2 local
+gpt2 tests/test_model
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
