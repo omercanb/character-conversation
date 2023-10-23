@@ -2,7 +2,8 @@ from datasets import load_dataset, Features, Value
 from transformers import AutoModelForCausalLM, AutoTokenizer, DataCollatorWithPadding, TrainingArguments, Trainer, DataCollatorForLanguageModeling, GPT2LMHeadModel
 from peft import LoraConfig, PeftConfig, PeftModel, get_peft_model, prepare_model_for_kbit_training
 
-path = "jokerdata.csv"
+character = "shrek"
+path = character + "data.csv"
 dataset = load_dataset("csv", data_files=path)
 
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
@@ -26,7 +27,7 @@ tokenizer.pad_token = tokenizer.eos_token
 def get_full_prompt(prompt_response_pair):
     return f"""
     <Human>: {prompt_response_pair['prompt']}
-    <Joker>: {prompt_response_pair['response']}
+    <Shrek>: {prompt_response_pair['response']}
     """.strip()
 
 def generate_and_tokenize_dataset(data_point):
@@ -58,4 +59,4 @@ trainer = Trainer(
 
 trainer.train()
 
-trainer.save_model('test_model')
+trainer.save_model(character + '_model')

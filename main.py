@@ -1,5 +1,6 @@
 from process_url import url_data_extractor
 import csv 
+import sys
 
 """
 example urls: 
@@ -12,10 +13,16 @@ https://imsdb.com/scripts/Coco.html
 """
 
 def main():
-    url = 'https://imsdb.com/scripts/Joker.html'
-    promt_response_list = url_data_extractor.get_prompt_response_list(url)
+    url = 'https://imsdb.com/scripts/Shrek.html'
+    possible_characters = url_data_extractor.choose_character(url)
+    print("Choose a character")
+    print(possible_characters)
+    character = input()
+    if character not in possible_characters:
+        sys.exit()
+    promt_response_list = url_data_extractor.get_prompt_response_list(url, character)
     
-    csv_file = "jokerdata.csv"
+    csv_file = character.lower() + "data.csv"
     field_names = promt_response_list[0].keys()
     #temporary bug fix
     del promt_response_list[0]

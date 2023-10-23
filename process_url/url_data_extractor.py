@@ -15,10 +15,15 @@ def get_url_dialogue(url):
     characters = get_characters(bold_utils.get_bold_lines(lines), mention_number = 10)
     dialogue = get_dialogue(lines, characters)
     dialogue_dict = get_dialoague_dict(dialogue, characters)
-    return dialogue_dict
+    return dialogue_dict 
 
-def get_prompt_response_list(url):
-    character = "JOKER"
+def choose_character(url):
+    text = get_raw_text(get_soup(url))
+    lines = line_utils.prepeare_lines(text)
+    characters = get_characters(bold_utils.get_bold_lines(lines), mention_number = 10)
+    return characters
+
+def get_prompt_response_list(url, character):
     text = get_raw_text(get_soup(url))
     lines = remove_bolds_not_followed_by_dialogue(remove_non_dialogue(line_utils.prepeare_lines(text)))
     lines = remove_repeated_characters(remove_start(lines, character))
@@ -104,7 +109,6 @@ def remove_bolds_not_followed_by_dialogue(lines):
         if is_bold(lines[i]) and is_bold(lines[i+1]):
             lines[i] = ""
     return remove_empty_lines(lines)
-
 
 def remove_empty_lines(lines):
     return list(filter(lambda x: x != "",lines))
